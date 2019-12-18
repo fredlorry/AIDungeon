@@ -9,7 +9,7 @@ from story import grammars
 from story.story_manager import *
 from story.utils import *
 
-from tgio import print, input, is_ready, get_num_options, _print as native_print
+from tgio import print, console_print, input, is_ready, get_num_options, _print as native_print
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
@@ -168,9 +168,10 @@ def play_aidungeon_2():
     story_manager = UnconstrainedStoryManager(generator)
     print("\n")
 
-    with open("opening.txt", "r", encoding="utf-8") as file:
-        starter = file.read()
-    print(starter)
+    # broken formatting in tg
+    #with open("opening.txt", "r", encoding="utf-8") as file:
+    #    starter = file.read()
+    #print(starter)
 
     while True:
         if story_manager.story != None:
@@ -379,5 +380,5 @@ def play_aidungeon_2():
 if __name__ == "__main__":
     native_print('Now you should initiate dialogue with your bot!')
     while not is_ready():
-        time.sleep(10)
+        time.sleep(3)
     play_aidungeon_2()

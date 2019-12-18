@@ -1,4 +1,5 @@
 from os import environ
+from time import sleep
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
@@ -39,10 +40,10 @@ def put_message_in_queue(update, context):
             "You are not supposed to text me! (or you didn't press /start, my master)")
     messages.put(update.effective_message.text)
 
-message_handler = MessageHandler(Filters.text, put_message_in_queue)
+message_handler = MessageHandler(Filters.all, put_message_in_queue)
 
-dispatcher.add_handler(message_handler)
 dispatcher.add_handler(start_handler)
+dispatcher.add_handler(message_handler)
 
 _input, _print = input, print
 
@@ -62,9 +63,11 @@ def new_print(msg):
     _print(msg)
     if not msg.strip():
         msg = '___'
-    bot.send_message(user_id, msg, parse_mode='Markdown')
+    sleep(0.03)
+    bot.send_message(user_id, msg)
 
-print = console_print = new_print
+print = new_print
+console_print = new_print
 
 def get_num_options(num):
     while True:
