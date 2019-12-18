@@ -9,6 +9,8 @@ from story import grammars
 from story.story_manager import *
 from story.utils import *
 
+from tgio import print, input, is_ready, get_num_options, _print as native_print
+
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
 
@@ -375,4 +377,7 @@ def play_aidungeon_2():
 
 
 if __name__ == "__main__":
+    native_print('Now you should initiate dialogue with your bot!')
+    while not is_ready():
+        time.sleep(10)
     play_aidungeon_2()
